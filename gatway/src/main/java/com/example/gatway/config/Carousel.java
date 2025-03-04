@@ -3,11 +3,13 @@ package com.example.gatway.config;
 
 import com.netflix.appinfo.InstanceInfo;
 import com.netflix.discovery.EurekaClient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
 @Service
+@Slf4j
 public class Carousel {
 
     private final EurekaClient eurekaClient;
@@ -19,7 +21,7 @@ public class Carousel {
         try{
             initAuthCarousel();
         }catch (NullPointerException e){
-            e.printStackTrace();
+            log.warn("Cant find active instance of Auth Service");
         }
 
         events();
@@ -39,24 +41,26 @@ public class Carousel {
 
     private void events(){
         eurekaClient.registerEventListener(eurekaEvent -> {
-            try{
-                initAuthCarousel();
-            }catch (NullPointerException e){
-                e.printStackTrace();
-            }
-
+            log.info("--START initAuthCarouser -registerEvent");
+            initAuthCarousel();
+            log.info("--STOP initAuthCarousel -registerEvent");
         });
         eurekaClient.unregisterEventListener(eurekaEvent -> {
             try{
+                log.info("--START initAuthCarousel - unregisterEvent");
                 initAuthCarousel();
             }catch (NullPointerException e){
                 e.printStackTrace();
+                log.warn("Cant find active instances of Auth Service");
             }
+            log.info("--STOP initAuthCarousel -unregisterEvent");
 
         });
     }
 
     private void initAuthCarousel() throws NullPointerException {
+        log.info("--START initAuthCarousel");
         instances = eurekaClient.getApplication("AUTH-SERVICE").getInstances();
+        log.info("--STOP initAuthCarousel");
     }
 }

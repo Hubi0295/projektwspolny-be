@@ -78,7 +78,7 @@ public class UserService {
                 }
             }
         }else {
-            log.info("Can't login beacose in token is empty");
+            log.info("Can't login because in token is empty");
             throw new IllegalArgumentException("Token can't be null");
         }
         try {
@@ -195,6 +195,7 @@ public class UserService {
             userRepository.save(user);
             return;
         }
+        log.info("User doesnt exist");
         throw new UserDontExistException("User dont exist");
     }
 
@@ -205,6 +206,7 @@ public class UserService {
             emailService.sendPasswordRecovery(user,resetOperations.getUid());
             return;
         }
+        log.info("User doesnt exist");
         throw new UserDontExistException("User dont exist");
     }
 
@@ -220,6 +222,7 @@ public class UserService {
                 return;
             }
         }
+        log.info("User doesnt exist");
         throw new UserDontExistException("User dont exist");
     }
 
