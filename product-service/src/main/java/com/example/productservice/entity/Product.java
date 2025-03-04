@@ -21,7 +21,7 @@ public class Product {
     @SequenceGenerator(name="products_id_seq", sequenceName = "products_id_seq", allocationSize = 1)
     private long id;
     private String uid;
-    private boolean activate;
+    private boolean activated;
     @Column(name="product_name")
     private String name;
     private String mainDesc;
