@@ -9,12 +9,11 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.Map;
 import java.util.Set;
-
+@MappedSuperclass
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-@MappedSuperclass
+@AllArgsConstructor
 public class Product {
     @Id
     @GeneratedValue(generator = "products_id_seq", strategy = GenerationType.SEQUENCE)
@@ -30,4 +29,7 @@ public class Product {
     private String[] imageUrls;
     private String parameters;
     private LocalDate createdAt;
+
+
 }
+

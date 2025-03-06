@@ -7,6 +7,7 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 
@@ -24,4 +25,5 @@ public class ProductEntity extends Product{
         super(id, uid, activated, name, mainDesc, descHtml, price, imageUrls, parameters, createdAt);
         this.category = category;
     }
+
 }
