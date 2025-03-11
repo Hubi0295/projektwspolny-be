@@ -15,10 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {
-    @Id
-    @GeneratedValue(generator = "products_id_seq", strategy = GenerationType.SEQUENCE)
-    @SequenceGenerator(name="products_id_seq", sequenceName = "products_id_seq", allocationSize = 1)
-    private long id;
+
     private String uid;
     private boolean activated;
     @Column(name="product_name")

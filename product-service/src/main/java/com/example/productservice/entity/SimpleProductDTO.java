@@ -6,13 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDate;
-
 @Getter
 @Setter
+@AllArgsConstructor
 @NoArgsConstructor
-
-public class ProductDTO extends Product{
-    private String categoryShortID;
-
-
+public class SimpleProductDTO {
+    private String name;
+    private String mainDesc;
+    private float price;
+    private String imageUrl;
+    private LocalDate createAt;
 }
