@@ -1,18 +1,17 @@
 package com.example.productservice.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
-import lombok.experimental.SuperBuilder;
+import lombok.*;
 
 import java.time.LocalDate;
+
 
 @Table(name="products")
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@Getter
+@Setter
+
 public class ProductEntity extends Product{
     @Id
     @GeneratedValue(generator = "products_id_seq", strategy = GenerationType.SEQUENCE)
@@ -26,6 +25,7 @@ public class ProductEntity extends Product{
         super(uid, activated, name, mainDesc, descHtml, price, imageUrls, parameters, createdAt);
         this.category = category;
         this.id = id;
+
     }
 
 }

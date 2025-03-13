@@ -1,0 +1,21 @@
+package com.example.fileservice.fasada;
+
+import com.example.fileservice.service.FtpService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+@RestController
+@RequestMapping(value = "/api/v1/image")
+@RequiredArgsConstructor
+public class ImageController {
+
+    private final FtpService ftpService;
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ResponseEntity<?> saveFile(@RequestParam MultipartFile multipartFile){
+        ftpService.uploadFileToFtp(multipartFile);
+        return null;
+    }
+}
