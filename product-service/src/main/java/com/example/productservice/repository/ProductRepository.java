@@ -7,11 +7,12 @@ import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface ProductRepository extends JpaRepository<ProductEntity,Long> {
     @Query(nativeQuery = true,value = "SELECT count(*) from products where activated is true")
     long countActiveProducts();
-
+    Optional<ProductEntity> findByUid(String uuid);
     List<ProductEntity> findByNameAndCreatedAt(String name, LocalDate createAt);
 }

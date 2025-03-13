@@ -1,25 +1,31 @@
 package com.example.productservice.service;
-
-import com.example.productservice.entity.ProductDTO;
+import org.springframework.web.client.RestTemplate;
 import com.example.productservice.entity.ProductEntity;
 import com.example.productservice.repository.CategoryRepository;
 import com.example.productservice.repository.ProductRepository;
+import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.criteria.*;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import jakarta.persistence.EntityManager;
-import java.util.UUID;
+import java.io.IOException;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-
+import java.util.*;
+import org.springframework.beans.factory.annotation.Value;
 @Service
 @RequiredArgsConstructor
 public class ProductService {
     @PersistenceContext
     EntityManager entityManager;
+    @Value("${file-service.url}")
+    private String FILE_SERVICE;
+
     private final ProductRepository productRepository;
     private final CategoryRepository categoryRepository;
 
@@ -102,16 +108,50 @@ public class ProductService {
         return entityManager.createQuery(query).getSingleResult();
 
     }
+    @Transactional
     public void createProduct(ProductEntity product) {
         if (product != null){
             product.setCreatedAt(LocalDate.now());
             product.setUid(UUID.randomUUID().toString());
             product.setActivated(true);
             productRepository.save(product);
-            //TODO AKTYWACJA GRAFIK
+            for (String uuid: product.getImageUrls()){
+                activateImage(uuid);
+            }
             return;
         }
         throw new RuntimeException();
     }
+
+    private void activateImage(String uuid){
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(URI.create(FILE_SERVICE+"?uuid="+uuid))
+                .method("PATCH",HttpRequest.BodyPublishers.noBody())
+                .build();
+        try {
+            HttpClient.newHttpClient().send(request,HttpResponse.BodyHandlers.ofString());
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    @Transactional
+    public void delete(String uuid) throws RuntimeException {
+        productRepository.findByUid(uuid).ifPresentOrElse(value->{
+            value.setActivated(false);
+            productRepository.save(value);
+            for (String image:value.getImageUrls()) {
+                deleteImages(image);
+            }
+
+        },()->{
+            throw new RuntimeException();
+        });
+    }
+
+    private void deleteImages(String uuid){
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.delete(FILE_SERVICE+"?uuid="+uuid);
+    }
+
 
 }
