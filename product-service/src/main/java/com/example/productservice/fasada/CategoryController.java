@@ -15,7 +15,6 @@ import com.example.productservice.exceptions.ObjectExistInDBException;
 @RestController
 @RequestMapping(value = "/api/v1/category")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*",maxAge = 3600)
 
 public class CategoryController {
 

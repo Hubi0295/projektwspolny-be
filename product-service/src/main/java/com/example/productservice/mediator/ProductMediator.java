@@ -31,12 +31,7 @@ public class ProductMediator {
 
 
     public ResponseEntity<?> getProduct(int page, int limit,String name,String category,Float price_min,Float price_max,String data,String sort,String order) {
-        List<ProductEntity> product = productService.getProduct(name,category,price_min,price_max,data,page,limit,sort,order);
-        product.forEach(value->{
-            for (int i = 0; i < value.getImageUrls().length; i++){
-                value.getImageUrls()[i] = FILE_SERVICE+"?uuid="+value.getImageUrls()[i];
-            }
-        });
+
 
         if (name != null && !name.isEmpty()){
             try {
@@ -45,6 +40,12 @@ public class ProductMediator {
                 throw new RuntimeException(e);
             }
         }
+        List<ProductEntity> product = productService.getProduct(name,category,price_min,price_max,data,page,limit,sort,order);
+        product.forEach(value->{
+            for (int i = 0; i < value.getImageUrls().length; i++){
+                value.getImageUrls()[i] = FILE_SERVICE+"?uuid="+value.getImageUrls()[i];
+            }
+        });
 
         if (name == null || name.isEmpty() || data == null || data.isEmpty()){
             List<SimpleProductDTO> simpleProductDTOS = new ArrayList<>();
@@ -66,6 +67,7 @@ public class ProductMediator {
             productService.createProduct(product);
             return ResponseEntity.ok(new Response("Successful created a product"));
         }catch (RuntimeException e){
+            e.printStackTrace();
             return ResponseEntity.status(400).body(new Response("Can't create product category don't exist"));
         }
 

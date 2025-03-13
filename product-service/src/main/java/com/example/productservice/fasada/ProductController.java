@@ -14,7 +14,6 @@ import com.example.productservice.mediator.ProductMediator;
 @RestController
 @RequestMapping("/api/v1/product")
 @RequiredArgsConstructor
-@CrossOrigin(origins = "*",maxAge = 3600,allowedHeaders = "*",exposedHeaders = "X-Total-Count")
 public class ProductController {
     private final ProductMediator productMediator;
     @RequestMapping(method = RequestMethod.GET)

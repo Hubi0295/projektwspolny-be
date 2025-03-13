@@ -66,6 +66,7 @@ public class MediatorImage {
         try {
             ImageEntity imageEntity = imageService.findByUuid(uuid);
             if (imageEntity != null){
+                imageService.delete(imageEntity);
                 ftpService.deleteFile(imageEntity.getPath());
                 return ResponseEntity.ok(new ImageResponse("File deleted"));
             }
