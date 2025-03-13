@@ -9,9 +9,12 @@ public class CookiService {
 
     public Cookie generateCookie(String name,String value,int exp){
         Cookie cookie = new Cookie(name,value);
-        cookie.setHttpOnly(true);
+        cookie.setHttpOnly(false);
+        cookie.setPath("/");
         cookie.setMaxAge(exp);
+        cookie.setHttpOnly(true);
         return cookie;
+
     }
 
     public Cookie removeCookie(Cookie[] cookies, String name){
