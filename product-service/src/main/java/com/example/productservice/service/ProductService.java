@@ -9,7 +9,7 @@ import jakarta.persistence.criteria.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import jakarta.persistence.EntityManager;
-
+import java.util.UUID;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -102,4 +102,16 @@ public class ProductService {
         return entityManager.createQuery(query).getSingleResult();
 
     }
+    public void createProduct(ProductEntity product) {
+        if (product != null){
+            product.setCreatedAt(LocalDate.now());
+            product.setUid(UUID.randomUUID().toString());
+            product.setActivated(true);
+            productRepository.save(product);
+            //TODO AKTYWACJA GRAFIK
+            return;
+        }
+        throw new RuntimeException();
+    }
+
 }

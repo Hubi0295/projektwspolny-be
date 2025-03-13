@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="gatway" />
         <module name="auth" />
+        <module name="file-service" />
         <module name="eureka" />
       </profile>
       <profile name="Annotation profile for product-service" enabled="true">
@@ -21,15 +22,6 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.0.Final/mapstruct-1.5.0.Final.jar" />
         </processorPath>
         <module name="product-service" />
-      </profile>
-      <profile name="Annotation profile for file-service" enabled="true">
-        <sourceOutputDir name="target/generated-sources/annotations" />
-        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <processorPath useClasspath="false">
-          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
-        </processorPath>
-        <module name="file-service" />
       </profile>
     </annotationProcessing>
   </component>

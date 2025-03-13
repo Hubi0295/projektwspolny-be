@@ -8,7 +8,7 @@ import com.example.productservice.entity.CategoryDTO;
 import com.example.productservice.exceptions.ObjectExistInDBException;
 import java.util.UUID;
 import java.util.List;
-
+import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class CategoryService {
@@ -18,6 +18,10 @@ public class CategoryService {
     public List<Category> getCategory(){
         return categoryRepository.findAll();
     }
+    public Optional<Category> findCategoryByShortID(String shortID){
+        return categoryRepository.findByShortID(shortID);
+    }
+
     public void create(CategoryDTO categoryDTO) throws ObjectExistInDBException {
         Category category = new Category();
         category.setName(categoryDTO.getName());
