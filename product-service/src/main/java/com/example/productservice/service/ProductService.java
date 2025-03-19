@@ -84,7 +84,7 @@ public class ProductService {
             predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%" + name.toLowerCase() + "%"));
         }
         if (category != null && !category.equals("")) {
-            categoryRepository.findByShortID(category).
+            categoryRepository.findByShortId(category).
                     ifPresent(value -> predicates.add(criteriaBuilder.equal(root.get("category"), value)));
 
         }
@@ -94,7 +94,7 @@ public class ProductService {
         if (price_max != null) {
             predicates.add(criteriaBuilder.lessThan(root.get("price"), price_max + 0.01));
         }
-        predicates.add(criteriaBuilder.isTrue(root.get("activate")));
+        predicates.add(criteriaBuilder.isTrue(root.get("activated")));
         return predicates;
 
     }

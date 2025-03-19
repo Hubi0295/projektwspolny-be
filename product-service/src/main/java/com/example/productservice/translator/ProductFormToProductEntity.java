@@ -24,7 +24,7 @@ public abstract class ProductFormToProductEntity {
 
     protected Category translate(String uuid){
         Category category = new Category();
-        category.setShortID(uuid);
+        category.setShortId(uuid);
         return category;
     }
 

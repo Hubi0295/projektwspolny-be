@@ -19,13 +19,13 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
     public Optional<Category> findCategoryByShortID(String shortID){
-        return categoryRepository.findByShortID(shortID);
+        return categoryRepository.findByShortId(shortID);
     }
 
     public void create(CategoryDTO categoryDTO) throws ObjectExistInDBException {
         Category category = new Category();
         category.setName(categoryDTO.getName());
-        category.setShortID(UUID.randomUUID().toString().replace("-","").substring(0,12));
+        category.setShortId(UUID.randomUUID().toString().replace("-","").substring(0,12));
 
         categoryRepository.findByName(category.getName()).ifPresent(value->{
             throw new ObjectExistInDBException("Category exist in DB with this name");

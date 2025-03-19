@@ -61,7 +61,7 @@ public class ProductMediator {
     public ResponseEntity<Response> saveProduct(ProductFormDTO productFormDTO) {
         try{
             ProductEntity product = formToProductEntity.toProductEntity(productFormDTO);
-            categoryService.findCategoryByShortID(product.getCategory().getShortID()).ifPresentOrElse(product::setCategory,()->{
+            categoryService.findCategoryByShortID(product.getCategory().getShortId()).ifPresentOrElse(product::setCategory,()->{
                 throw new CategoryDoesntExistException();
             });
             productService.createProduct(product);
