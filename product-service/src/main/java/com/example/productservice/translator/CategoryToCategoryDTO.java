@@ -5,7 +5,7 @@ import com.example.productservice.entity.CategoryDTO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mappings;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public abstract class CategoryToCategoryDTO {
 
     public CategoryDTO toCategoryDTO(Category category){

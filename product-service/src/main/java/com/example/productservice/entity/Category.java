@@ -19,5 +19,6 @@ public class Category {
     private long id;
     @Column(name= "category_name")
     private String name;
+    @Column(name="short_id")
     private String shortId;
 }
