@@ -52,7 +52,7 @@ public class ProductService {
                     column = "category";
                     break;
                 case "data":
-                    column = "createAt";
+                    column = "createdAt";
                     break;
                 default:
                     column="price";

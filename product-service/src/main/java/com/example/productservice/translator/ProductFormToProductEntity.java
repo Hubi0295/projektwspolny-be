@@ -7,7 +7,7 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public abstract class ProductFormToProductEntity {
 
     public ProductEntity toProductEntity(ProductFormDTO productFormDTO){
