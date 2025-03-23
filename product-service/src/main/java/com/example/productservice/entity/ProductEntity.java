@@ -24,6 +24,7 @@ public class ProductEntity extends Product{
     public ProductEntity(long id, String uid, boolean activated, String name, String mainDesc, String descHtml, float price, String[] imageUrls, String parameters, LocalDate createdAt, Category category) {
         super(uid, activated, name, mainDesc, descHtml, price, imageUrls, parameters, createdAt);
         this.category = category;
+
         this.id = id;
 
     }
