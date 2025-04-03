@@ -173,6 +173,7 @@ public class UserService {
                 return ResponseEntity.ok(new AuthResponse(Code.A1));
             }
         }
+        log.info("adsadasd");
         log.info("User dont exist");
         log.info("--STOP LoginService");
         return ResponseEntity.ok(new AuthResponse(Code.A2));
@@ -195,7 +196,6 @@ public class UserService {
             userRepository.save(user);
             return;
         }
-        log.info("User doesnt exist");
         throw new UserDontExistException("User dont exist");
     }
 
@@ -206,7 +206,21 @@ public class UserService {
             emailService.sendPasswordRecovery(user,resetOperations.getUid());
             return;
         }
-        log.info("User doesnt exist");
+        throw new UserDontExistException("User dont exist");
+    }
+
+    public void restPassword(ChangePasswordData changePasswordData) throws UserDontExistException{
+        ResetOperations resetOperations = resetOperationsRepository.findByUid(changePasswordData.getUid()).orElse(null);
+        if (resetOperations != null){
+            User user = userRepository.findUserByUuid(resetOperations.getUser().getUuid()).orElse(null);
+
+            if (user != null){
+                user.setPassword(changePasswordData.getPassword());
+                saveUser(user);
+                resetOperationService.endOperation(resetOperations.getUid());
+                return;
+            }
+        }
         throw new UserDontExistException("User dont exist");
     }
     public void authorize(HttpServletRequest request) throws UserDontExistException{
@@ -231,22 +245,6 @@ public class UserService {
             String subject = jwtService.getSubject(refresh);
             userRepository.findUserByLoginAndLockAndEnabledAndIsAdmin(subject).orElseThrow(()->new UserDontExistException("User not found"));
         }
-    }
-
-    public void restPassword(ChangePasswordData changePasswordData) throws UserDontExistException{
-        ResetOperations resetOperations = resetOperationsRepository.findByUid(changePasswordData.getUid()).orElse(null);
-        if (resetOperations != null){
-            User user = userRepository.findUserByUuid(resetOperations.getUser().getUuid()).orElse(null);
-
-            if (user != null){
-                user.setPassword(changePasswordData.getPassword());
-                saveUser(user);
-                resetOperationService.endOperation(resetOperations.getUid());
-                return;
-            }
-        }
-        log.info("User doesnt exist");
-        throw new UserDontExistException("User dont exist");
     }
 
 }

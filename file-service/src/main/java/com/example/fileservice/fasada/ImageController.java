@@ -1,12 +1,14 @@
 package com.example.fileservice.fasada;
 
+import com.example.fileservice.entity.ImageResponse;
 import com.example.fileservice.mediator.MediatorImage;
-import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import com.example.fileservice.entity.ImageResponse;
+
+import java.io.IOException;
+
 @RestController
 @RequestMapping(value = "/api/v1/image")
 @RequiredArgsConstructor
@@ -31,6 +33,4 @@ public class ImageController {
         return mediatorImage.activateImage(uuid);
     }
 
-
 }
-

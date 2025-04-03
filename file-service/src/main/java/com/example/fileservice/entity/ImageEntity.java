@@ -1,6 +1,5 @@
 package com.example.fileservice.entity;
 
-import lombok.Builder;
 import jakarta.persistence.*;
 import lombok.*;
 
