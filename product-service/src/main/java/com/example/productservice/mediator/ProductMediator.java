@@ -65,6 +65,8 @@ public class ProductMediator {
             categoryService.findCategoryByShortID(product.getCategory().getShortId()).ifPresentOrElse(product::setCategory,()->{
                 throw new CategoryDoesntExistException();
             });
+            System.out.println(product.getCategory().getShortId());
+            System.out.println(product.getParameters());
             productService.createProduct(product);
             return ResponseEntity.ok(new Response("Successful created a product"));
         }catch (RuntimeException e){
