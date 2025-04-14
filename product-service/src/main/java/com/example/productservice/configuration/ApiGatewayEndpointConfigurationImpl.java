@@ -1,13 +1,12 @@
 package com.example.productservice.configuration;
 
 import jakarta.annotation.PostConstruct;
-import org.example.ApiGatewayEndpointConfiguration;
-import org.example.entity.Endpoint;
-import org.example.entity.HttpMethod;
-import org.example.entity.Response;
-import org.example.entity.Role;
+import com.example.basket.ApiGatewayEndpointConfiguration;
+import com.example.basket.entity.Endpoint;
+import com.example.basket.entity.HttpMethod;
+import com.example.basket.entity.Response;
+import com.example.basket.entity.Role;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -18,7 +17,7 @@ public class ApiGatewayEndpointConfigurationImpl implements ApiGatewayEndpointCo
     @Value("${api-gateway.url}")
     private String GATEWAY_URL;
     @PostConstruct
-    public void startrOperation(){
+    public void startOperation(){
         initMap();
         register();
     }
@@ -26,6 +25,7 @@ public class ApiGatewayEndpointConfigurationImpl implements ApiGatewayEndpointCo
     @Override
     public void initMap() {
         endpointList.add(new Endpoint("/api/v1/product", HttpMethod.GET, Role.GUEST));
+        endpointList.add(new Endpoint("/api/v1/product/getExternal", HttpMethod.GET, Role.GUEST));
         endpointList.add(new Endpoint("/api/v1/product", HttpMethod.POST, Role.ADMIN));
         endpointList.add(new Endpoint("/api/v1/product", HttpMethod.DELETE, Role.ADMIN));
         endpointList.add(new Endpoint("/api/v1/category", HttpMethod.GET, Role.GUEST));

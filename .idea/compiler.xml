@@ -13,7 +13,7 @@
         <module name="file-service" />
         <module name="eureka" />
       </profile>
-      <profile name="Annotation profile for product-service" enabled="true">
+      <profile name="Annotation profile for order" enabled="true">
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
@@ -22,7 +22,9 @@
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct-processor/1.5.0.Final/mapstruct-processor-1.5.0.Final.jar" />
           <entry name="$MAVEN_REPOSITORY$/org/mapstruct/mapstruct/1.5.0.Final/mapstruct-1.5.0.Final.jar" />
         </processorPath>
+        <module name="basket" />
         <module name="product-service" />
+        <module name="order" />
       </profile>
     </annotationProcessing>
   </component>
@@ -30,9 +32,11 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="RegisterEndpointInformation" options="" />
       <module name="auth" options="-parameters" />
+      <module name="basket" options="-parameters -Amapstruct.defaultComponentModel=spring" />
       <module name="eureka" options="-parameters" />
       <module name="file-service" options="-parameters" />
       <module name="gatway" options="-parameters" />
+      <module name="order" options="-parameters -Amapstruct.defaultComponentModel=spring" />
       <module name="product-service" options="-parameters -Amapstruct.defaultComponentModel=spring" />
     </option>
   </component>

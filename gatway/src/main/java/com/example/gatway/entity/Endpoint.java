@@ -1,7 +1,7 @@
 package com.example.gatway.entity;
 
-import org.example.entity.HttpMethod;
-import org.example.entity.Role;
+import com.example.basket.entity.HttpMethod;
+import com.example.basket.entity.Role;
 
 import java.util.Objects;
 

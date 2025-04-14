@@ -2,11 +2,11 @@ package com.example.fileservice.configuration;
 
 import jakarta.annotation.PostConstruct;
 
-import org.example.ApiGatewayEndpointConfiguration;
-import org.example.entity.Endpoint;
-import org.example.entity.Role;
-import org.example.entity.Response;
-import org.example.entity.HttpMethod;
+import com.example.basket.ApiGatewayEndpointConfiguration;
+import com.example.basket.entity.Endpoint;
+import com.example.basket.entity.Role;
+import com.example.basket.entity.Response;
+import com.example.basket.entity.HttpMethod;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;

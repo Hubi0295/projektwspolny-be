@@ -152,6 +152,10 @@ public class ProductService {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.delete(FILE_SERVICE+"?uuid="+uuid);
     }
+    public Optional<ProductEntity> getProductByUuid(String uuid) {
+        return productRepository.findByUid(uuid);
+    }
+
 
 
 }

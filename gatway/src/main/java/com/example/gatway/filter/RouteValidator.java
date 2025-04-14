@@ -1,16 +1,15 @@
 package com.example.gatway.filter;
 
 import com.example.gatway.entity.Endpoint;
-import org.example.entity.Role;
+import com.example.basket.entity.Role;
 import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.stereotype.Component;
-import org.example.entity.HttpMethod;
-import java.util.ArrayList;
+import com.example.basket.entity.HttpMethod;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 @Component
 public class RouteValidator {
@@ -19,7 +18,7 @@ public class RouteValidator {
             new Endpoint("/auth/register",HttpMethod.POST,Role.GUEST),
             new Endpoint("/auth/login",HttpMethod.POST,Role.GUEST),
             new Endpoint("/auth/validate",HttpMethod.GET,Role.GUEST),
-            new Endpoint("/auth/activate",HttpMethod.POST,Role.GUEST),
+            new Endpoint("/auth/activate",HttpMethod.GET,Role.GUEST),
             new Endpoint("/auth/authorize",HttpMethod.GET,Role.GUEST),
             new Endpoint("/auth/reset-password",HttpMethod.PATCH,Role.GUEST),
             new Endpoint("/auth/reset-password",HttpMethod.POST,Role.GUEST),
@@ -42,10 +41,6 @@ public class RouteValidator {
             }
 
         }
-        adminEndpoints.forEach(value->{
-            System.out.println(value.getUrl());
-            System.out.println(value.getHttpMethod());
-        });
     }
 
     public Predicate<ServerHttpRequest> isAdmin =

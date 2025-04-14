@@ -3,7 +3,7 @@ package com.example.gatway.fasada;
 import com.example.gatway.entity.Endpoint;
 import com.example.gatway.filter.RouteValidator;
 import lombok.RequiredArgsConstructor;
-import org.example.entity.Response;
+import com.example.basket.entity.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
